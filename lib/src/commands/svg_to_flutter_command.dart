@@ -8,6 +8,7 @@ import 'package:dart_style/dart_style.dart';
 import 'package:io/io.dart';
 import 'package:path/path.dart' as path;
 import 'package:recase/recase.dart';
+import 'package:svg_to_flutter/src/utils/normalize_name.dart';
 
 import '../constants.dart';
 import '../exception.dart';
@@ -185,10 +186,12 @@ class SvgToFlutterCommand extends Command<int> {
         );
         for (final String key in icons.keys) {
           final String codePoint = '0x${icons[key].toRadixString(16)}';
+          final String normalizedName = normalizeText(key);
+
           classBuilder.fields.add(
             Field(
               (FieldBuilder fieldBuild) {
-                fieldBuild.name = key;
+                fieldBuild.name = normalizedName;
                 fieldBuild.type = refer('IconData');
                 fieldBuild.modifier = FieldModifier.final$;
                 fieldBuild.assignment =
