@@ -178,12 +178,8 @@ class SvgToFlutterCommand extends Command<int> {
       (ClassBuilder builder) {
         final ClassBuilder classBuilder = builder;
         classBuilder.name = className;
-        classBuilder.methods.add(
-          Method(
-            (MethodBuilder constructorBuilder) =>
-                constructorBuilder..name = '$className._',
-          ),
-        );
+        classBuilder.abstract = true;
+        classBuilder.modifier = ClassModifier.final$;
         for (final String key in icons.keys) {
           final String codePoint = '0x${icons[key].toRadixString(16)}';
           final String normalizedName = normalizeText(key);
