@@ -210,7 +210,7 @@ class SvgToFlutterCommand extends Command<int> {
     );
 
     const String ignore = '''
-// ignore_for_file: sort_constructors_first, public_member_api_docs
+// ignore_for_file: sort_constructors_first, public_member_api_docs, constant_identifier_names
 ''';
 
     final DartEmitter emitter = DartEmitter();
