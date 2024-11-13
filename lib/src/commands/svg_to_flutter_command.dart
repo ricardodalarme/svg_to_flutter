@@ -171,29 +171,54 @@ class SvgToFlutterCommand extends Command<int> {
         ),
       ),
     );
+
     final Map<String, dynamic> icons = jsonDecode(
       await iconfontsFile.readAsString(),
     );
-    final Class bbIcons = Class(
+
+    // Create _IconData class
+    final Class iconDataClass = Class(
       (ClassBuilder builder) {
-        final ClassBuilder classBuilder = builder;
-        classBuilder.name = className;
-        classBuilder.abstract = true;
-        classBuilder.modifier = ClassModifier.final$;
+        builder
+          ..name = '_IconData'
+          ..extend = refer('IconData')
+          ..constructors.add(Constructor((constructorBuilder) {
+            constructorBuilder
+              ..constant = true
+              ..requiredParameters.add(Parameter((paramBuilder) {
+                paramBuilder
+                  ..name = 'codePoint'
+                  ..toSuper = true;
+              }))
+              ..initializers.add(Code(
+                "super(codePoint, fontFamily: '$className')",
+              ));
+          }));
+      },
+    );
+
+    // Create the icons class with the fields
+    final Class iconsClass = Class(
+      (ClassBuilder builder) {
+        builder
+          ..name = className
+          ..abstract = true
+          ..modifier = ClassModifier.final$;
+
         for (final String key in icons.keys) {
           final String codePoint = '0x${icons[key].toRadixString(16)}';
           final String normalizedName = normalizeText(key);
 
-          classBuilder.fields.add(
+          builder.fields.add(
             Field(
-              (FieldBuilder fieldBuild) {
-                fieldBuild.name = normalizedName;
-                fieldBuild.type = refer('IconData');
-                fieldBuild.modifier = FieldModifier.final$;
-                fieldBuild.assignment =
-                    Code('IconData($codePoint, fontFamily: fontFamily)');
-                fieldBuild.static = true;
-                fieldBuild.modifier = FieldModifier.constant;
+              (FieldBuilder fieldBuilder) {
+                fieldBuilder
+                  ..name = normalizedName
+                  ..type = refer('IconData')
+                  ..modifier = FieldModifier.final$
+                  ..assignment = Code('_IconData($codePoint)')
+                  ..static = true
+                  ..modifier = FieldModifier.constant;
               },
             ),
           );
@@ -210,20 +235,22 @@ class SvgToFlutterCommand extends Command<int> {
 /// *****************************************************
 ///  SvgToFlutter
 /// *****************************************************
-
 ''';
 
     final String import = """
 import 'package:flutter/widgets.dart';
 
 const String fontFamily = '$className';
+""";
 
-    """;
-    final String emitterResult =
-        DartFormatter().format('${bbIcons.accept(emitter)}');
+    // Emit the new classes
+    final String iconDataClassCode = iconDataClass.accept(emitter).toString();
+    final String iconsClassCode = iconsClass.accept(emitter).toString();
+
     final DartFormatter formatter = DartFormatter();
-    final String result =
-        formatter.format(ignore + header + import + emitterResult);
+    final String result = formatter.format(
+      '$ignore$header$import$iconDataClassCode\n$iconsClassCode',
+    );
 
     final String filePath = path.join(
       rootDirector.path,
