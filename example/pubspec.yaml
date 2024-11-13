@@ -33,7 +33,7 @@ dependencies:
     path: ../
 
 dev_dependencies:
-  camus_lints: ^1.1.1
+  lints: ^5.0.0
   flutter_test:
     sdk: flutter
 
