@@ -218,7 +218,7 @@ class SvgToFlutterCommand extends Command<int> {
 ''';
 
     final String import = """
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 const String fontFamily = '$className';
 
