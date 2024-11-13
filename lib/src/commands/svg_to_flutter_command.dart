@@ -188,13 +188,6 @@ class SvgToFlutterCommand extends Command<int> {
           classBuilder.fields.add(
             Field(
               (FieldBuilder fieldBuild) {
-                if (!argResults![deleteInput]) {
-                  final String itemSvgPath =
-                      path.join(argResults![svgInputDir], '$key.svg');
-                  fieldBuild.docs.add(
-                    '/// File path: ${itemSvgPath.replaceAll(r'\', r'/')}',
-                  );
-                }
                 fieldBuild.name = key;
                 fieldBuild.type = refer('IconData');
                 fieldBuild.modifier = FieldModifier.final$;
