@@ -1,24 +1,22 @@
 # SvgToFlutter
 
-![GitHub stars](https://img.shields.io/github/stars/camus-design/svg_to_flutter?style=social)
+![GitHub stars](https://img.shields.io/github/stars/ricardodalarme/svg_to_flutter?style=social)
 [![Pub Version](https://img.shields.io/pub/v/svg_to_flutter?label=version&style=flat-square)](https://pub.dev/packages/svg_to_flutter/changelog)
 ![Pub Likes](https://img.shields.io/pub/likes/svg_to_flutter?label=Pub%20Likes&style=flat-squar)
 ![Pub Points](https://img.shields.io/pub/points/svg_to_flutter?label=Pub%20Points&style=flat-squar)
-[![MIT Licence](https://img.shields.io/github/license/camus-design/svg_to_flutter?style=flat-square&longCache=true)](https://opensource.org/licenses/mit-license.php)
+[![MIT Licence](https://img.shields.io/github/license/ricardodalarme/svg_to_flutter?style=flat-square&longCache=true)](https://opensource.org/licenses/mit-license.php)
 
 A tool for converting SVG files to font files.
 
 ## Table of Contents
 
-- [SvgToFlutter](#svgtoflutter)
-  - [Table of Contents](#table-of-contents)
-  - [Background](#background)
-  - [Requirements](#requirements)
-  - [Get Started](#get-started)
-    - [Install](#install)
-    - [An Example](#an-example)
-  - [Params](#params)
-  - [License](#license)
+- [Table of Contents](#table-of-contents)
+- [Background](#background)
+- [Requirements](#requirements)
+- [Get Started](#get-started)
+  - [Install](#install)
+  - [An Example](#an-example)
+- [Params](#params)
 
 ## Background
 
@@ -66,7 +64,3 @@ dart pub global activate svg_to_flutter
  --class-output    | Flutter icons Class output dir | -- |
  --name    | Flutter icons class Name | CamusIcons |
  --delete-input  | Is delete your input svg, if false, can preview svg | false  |
-
-## License
-
-[MIT](LICENSE) © Camus Design
