@@ -35,6 +35,11 @@ class SvgToFlutterCommand extends Command<int> {
       defaultsTo: defaultIconsClassName,
       help: 'Flutter icons class Name',
     );
+    argParser.addOption(
+      iconsPackageName,
+      defaultsTo: null,
+      help: 'Flutter icons package name',
+    );
     argParser.addFlag(
       deleteInput,
       defaultsTo: false,
@@ -162,6 +167,8 @@ class SvgToFlutterCommand extends Command<int> {
   Future<void> _generateFlutterFile() async {
     final String className =
         argResults![iconsClassName] ?? defaultIconsClassName;
+    final String? fontPackage = argResults![iconsPackageName];
+
     final File iconfontsFile = File.fromUri(
       rootDirector.uri.resolve(
         path.join(
@@ -191,7 +198,7 @@ class SvgToFlutterCommand extends Command<int> {
                   ..toSuper = true;
               }))
               ..initializers.add(Code(
-                "super(codePoint, fontFamily: '$className')",
+                "super(fontFamily: '$className'${fontPackage != null ? ", fontPackage: '$fontPackage'" : ''})",
               ));
           }));
       },
