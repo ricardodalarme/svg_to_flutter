@@ -2,7 +2,7 @@
 import 'dart:io';
 
 import 'package:io/io.dart';
-import 'package:svg_to_font/svg_to_font.dart';
+import 'package:svg_to_flutter/svg_to_flutter.dart';
 import 'package:test/test.dart';
 
 const String testDirPath = './example/camus_test';
@@ -19,7 +19,7 @@ void main() {
       }
     });
     test('Generate icons', () async {
-      final int exitCode = await SvgToFontCommandRunner().run(
+      final int exitCode = await SvgToFlutterCommandRunner().run(
         <String>[
           'generate',
           '--input',
@@ -36,7 +36,7 @@ void main() {
   });
 
   test('Do not pass input parameter', () async {
-    final int exitCode = await SvgToFontCommandRunner().run(
+    final int exitCode = await SvgToFlutterCommandRunner().run(
       <String>[
         'generate',
         '--font-output',

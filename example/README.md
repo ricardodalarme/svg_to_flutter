@@ -1,6 +1,6 @@
 # example
 
-SvgToFont generate example project.
+SvgToFlutter generate example project.
 
 ## Getting Started
 

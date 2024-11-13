@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:svg_to_font/svg_to_font.dart';
+import 'package:svg_to_flutter/svg_to_flutter.dart';
 
 void main(List<String> arguments) async {
-  exit(await SvgToFontCommandRunner().run(arguments));
+  exit(await SvgToFlutterCommandRunner().run(arguments));
 }

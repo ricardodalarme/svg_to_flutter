@@ -1,16 +1,16 @@
-# SvgToFont
+# SvgToFlutter
 
-![GitHub stars](https://img.shields.io/github/stars/camus-design/svg_to_font?style=social)
-[![Pub Version](https://img.shields.io/pub/v/svg_to_font?label=version&style=flat-square)](https://pub.dev/packages/svg_to_font/changelog)
-![Pub Likes](https://img.shields.io/pub/likes/svg_to_font?label=Pub%20Likes&style=flat-squar)
-![Pub Points](https://img.shields.io/pub/points/svg_to_font?label=Pub%20Points&style=flat-squar)
-[![MIT Licence](https://img.shields.io/github/license/camus-design/svg_to_font?style=flat-square&longCache=true)](https://opensource.org/licenses/mit-license.php)
+![GitHub stars](https://img.shields.io/github/stars/camus-design/svg_to_flutter?style=social)
+[![Pub Version](https://img.shields.io/pub/v/svg_to_flutter?label=version&style=flat-square)](https://pub.dev/packages/svg_to_flutter/changelog)
+![Pub Likes](https://img.shields.io/pub/likes/svg_to_flutter?label=Pub%20Likes&style=flat-squar)
+![Pub Points](https://img.shields.io/pub/points/svg_to_flutter?label=Pub%20Points&style=flat-squar)
+[![MIT Licence](https://img.shields.io/github/license/camus-design/svg_to_flutter?style=flat-square&longCache=true)](https://opensource.org/licenses/mit-license.php)
 
 A tool for converting SVG files to font files.
 
 ## Table of Contents
 
-- [SvgToFont](#svgtofont)
+- [SvgToFlutter](#svgtoflutter)
   - [Table of Contents](#table-of-contents)
   - [Background](#background)
   - [Requirements](#requirements)
@@ -22,7 +22,7 @@ A tool for converting SVG files to font files.
 
 ## Background
 
-To facilitate developers to quickly generate icon font (.ttf) and Flutter icon class, We developed the svg_to_font library.
+To facilitate developers to quickly generate icon font (.ttf) and Flutter icon class, We developed the svg_to_flutter library.
 
 Then you can use icons like the font.
 
@@ -35,7 +35,7 @@ Node.JS V10+ . [Install Node](https://nodejs.org/en/download/)
 ### Install
 
 ```shell
-dart pub global activate svg_to_font
+dart pub global activate svg_to_flutter
 ```
 
 ### An Example
@@ -44,7 +44,7 @@ dart pub global activate svg_to_font
 2. Generated `camus_icons.dart` in `example/lib` and `camus_icons.ttf` in `example/assets`
 
     ```shell
-    svg_to_font generate  --input=./example/assets --font-output=./example/assets/fonts --class-output=./example/lib
+    svg_to_flutter generate  --input=./example/assets --font-output=./example/assets/fonts --class-output=./example/lib
     ```
 
 3. Add some code to `pubspec.yaml`

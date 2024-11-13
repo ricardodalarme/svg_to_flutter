@@ -1,7 +1,7 @@
 // ignore_for_file: sort_constructors_first, public_member_api_docs
 /// GENERATED CODE - DO NOT MODIFY BY HAND
 /// *****************************************************
-///  SvgToFont
+///  SvgToFlutter
 /// *****************************************************
 
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 /// node package.json template
 const String packageJsonTemplate = '''
 {
-  "name": "svg_to_font",
+  "name": "svg_to_flutter",
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {

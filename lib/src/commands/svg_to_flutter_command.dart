@@ -14,9 +14,9 @@ import '../exception.dart';
 import '../templates/package_json_template.dart';
 
 /// Generate icon font (.ttf) and Flutter icon class
-class SvgToFontCommand extends Command<int> {
+class SvgToFlutterCommand extends Command<int> {
   /// constructor
-  SvgToFontCommand() {
+  SvgToFlutterCommand() {
     argParser.addOption(
       svgInputDir,
       help: 'Input your svg file path',
@@ -49,19 +49,19 @@ class SvgToFontCommand extends Command<int> {
 
   void _handleArguments() {
     if (argResults![svgInputDir] == null) {
-      throw const SvgToFontUsageException(
+      throw const SvgToFlutterUsageException(
         'Svg files path not found',
       );
     }
 
     if (argResults![fontOutputDir] == null) {
-      throw const SvgToFontUsageException(
+      throw const SvgToFlutterUsageException(
         'Output your fonts dir not found',
       );
     }
 
     if (argResults![iconsOutputDir] == null) {
-      throw const SvgToFontUsageException(
+      throw const SvgToFlutterUsageException(
         'Flutter icons output dir not found',
       );
     }
@@ -75,7 +75,7 @@ class SvgToFontCommand extends Command<int> {
     );
 
     if (result.exitCode != 0) {
-      throw const SvgToFontException(
+      throw const SvgToFlutterException(
         'Please install NodeJS. Recommended to install V10+, you can click https://nodejs.org/en/ intall it!',
       );
     }
@@ -147,12 +147,12 @@ class SvgToFontCommand extends Command<int> {
           }),
         );
 
-        throw const SvgToFontException(
+        throw const SvgToFlutterException(
           'generate iconfont is Failed!',
         );
       }
     } catch (e) {
-      throw const SvgToFontException(
+      throw const SvgToFlutterException(
         'generate iconfont is Failed!',
       );
     }
@@ -216,7 +216,7 @@ class SvgToFontCommand extends Command<int> {
     final DartEmitter emitter = DartEmitter();
     const String header = '''/// GENERATED CODE - DO NOT MODIFY BY HAND
 /// *****************************************************
-///  SvgToFont
+///  SvgToFlutter
 /// *****************************************************
 
 ''';
