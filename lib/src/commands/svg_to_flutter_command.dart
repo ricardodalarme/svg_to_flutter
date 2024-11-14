@@ -246,8 +246,6 @@ class SvgToFlutterCommand extends Command<int> {
 
     final String import = """
 import 'package:flutter/widgets.dart';
-
-const String fontFamily = '$className';
 """;
 
     // Emit the new classes
