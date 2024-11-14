@@ -1,16 +1,15 @@
-// ignore_for_file: sort_constructors_first, public_member_api_docs
+// ignore_for_file: sort_constructors_first, public_member_api_docs, constant_identifier_names, dangling_library_doc_comments
 /// GENERATED CODE - DO NOT MODIFY BY HAND
 /// *****************************************************
 ///  SvgToFlutter
 /// *****************************************************
+import 'package:flutter/widgets.dart';
 
-import 'package:flutter/material.dart';
+class _IconData extends IconData {
+  const _IconData(super.codePoint)
+      : super(fontFamily: 'CamusIcons', fontPackage: 'base_project');
+}
 
-const String fontFamily = 'CamusIcons';
-
-class CamusIcons {
-  /// File path: ./example/assets/test.svg
-  static const IconData test = IconData(0xf101, fontFamily: fontFamily);
-
-  CamusIcons._();
+abstract final class CamusIcons {
+  static const IconData test = _IconData(0xf101);
 }
