@@ -3,12 +3,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:code_builder/code_builder.dart';
-import 'package:dart_style/dart_style.dart';
 import 'package:io/io.dart';
 import 'package:path/path.dart' as path;
 import 'package:recase/recase.dart';
-import 'package:svg_to_flutter/src/utils/normalize_name.dart';
+import 'package:svg_to_flutter/src/builder/icons_data_builder.dart';
 
 import '../constants.dart';
 import '../exception.dart';
@@ -183,82 +181,10 @@ class SvgToFlutterCommand extends Command<int> {
       await iconfontsFile.readAsString(),
     );
 
-    // Create _IconData class
-    final Class iconDataClass = Class(
-      (ClassBuilder builder) {
-        builder
-          ..name = '_IconData'
-          ..extend = refer('IconData')
-          ..constructors.add(Constructor((constructorBuilder) {
-            constructorBuilder
-              ..constant = true
-              ..requiredParameters.add(Parameter((paramBuilder) {
-                paramBuilder
-                  ..name = 'codePoint'
-                  ..toSuper = true;
-              }))
-              ..initializers.add(Code(
-                "super(fontFamily: '$className'${fontPackage != null ? ", fontPackage: '$fontPackage'" : ''})",
-              ));
-          }));
-      },
-    );
-
-    // Create the icons class with the fields
-    final Class iconsClass = Class(
-      (ClassBuilder builder) {
-        builder
-          ..name = className
-          ..abstract = true
-          ..modifier = ClassModifier.final$;
-
-        for (final String key in icons.keys) {
-          final String codePoint = '0x${icons[key].toRadixString(16)}';
-          final String normalizedName = normalizeText(key);
-
-          builder.fields.add(
-            Field(
-              (FieldBuilder fieldBuilder) {
-                fieldBuilder
-                  ..name = normalizedName
-                  ..type = refer('IconData')
-                  ..modifier = FieldModifier.final$
-                  ..assignment = Code('_IconData($codePoint)')
-                  ..static = true
-                  ..modifier = FieldModifier.constant;
-              },
-            ),
-          );
-        }
-      },
-    );
-
-    const String ignore = '''
-// ignore_for_file: sort_constructors_first, public_member_api_docs, constant_identifier_names, dangling_library_doc_comments
-''';
-    const dartFormatWidth = '''
-// dart format width=80';
-''';
-
-    final DartEmitter emitter = DartEmitter();
-    const String header = '''/// GENERATED CODE - DO NOT MODIFY BY HAND
-/// *****************************************************
-///  SvgToFlutter
-/// *****************************************************
-''';
-
-    final String import = """
-import 'package:flutter/widgets.dart';
-""";
-
-    // Emit the new classes
-    final String iconDataClassCode = iconDataClass.accept(emitter).toString();
-    final String iconsClassCode = iconsClass.accept(emitter).toString();
-
-    final DartFormatter formatter = DartFormatter(
-        languageVersion: DartFormatter.latestShortStyleLanguageVersion);
-    final String result = formatter.format(
-      '$ignore$dartFormatWidth$header$import$iconDataClassCode\n$iconsClassCode',
+    final String iconsDataCode = iconsDataBuilder(
+      icons: icons,
+      className: className,
+      fontPackage: fontPackage,
     );
 
     final String filePath = path.join(
@@ -268,7 +194,7 @@ import 'package:flutter/widgets.dart';
     );
 
     final File flutterIconFile = File(filePath);
-    flutterIconFile.writeAsStringSync(result);
+    flutterIconFile.writeAsStringSync(iconsDataCode);
   }
 
   /// copy file & delete svg or delete node dir
