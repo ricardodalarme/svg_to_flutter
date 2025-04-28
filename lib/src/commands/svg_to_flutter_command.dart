@@ -236,6 +236,9 @@ class SvgToFlutterCommand extends Command<int> {
     const String ignore = '''
 // ignore_for_file: sort_constructors_first, public_member_api_docs, constant_identifier_names, dangling_library_doc_comments
 ''';
+    const dartFormatWidth = '''
+// dart format width=80';
+''';
 
     final DartEmitter emitter = DartEmitter();
     const String header = '''/// GENERATED CODE - DO NOT MODIFY BY HAND
@@ -252,9 +255,10 @@ import 'package:flutter/widgets.dart';
     final String iconDataClassCode = iconDataClass.accept(emitter).toString();
     final String iconsClassCode = iconsClass.accept(emitter).toString();
 
-    final DartFormatter formatter = DartFormatter();
+    final DartFormatter formatter = DartFormatter(
+        languageVersion: DartFormatter.latestShortStyleLanguageVersion);
     final String result = formatter.format(
-      '$ignore$header$import$iconDataClassCode\n$iconsClassCode',
+      '$ignore$dartFormatWidth$header$import$iconDataClassCode\n$iconsClassCode',
     );
 
     final String filePath = path.join(
